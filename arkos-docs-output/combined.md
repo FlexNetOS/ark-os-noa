@@ -347,7 +347,7 @@ mkdir -p storage/{oci,minio,postgres,supabase,artifacts} && tree -L 2 storage ||
 # Content‑address an artefact
 digest=$(sha256sum output.zip | awk '{print $1}')
 cp output.zip storage/artifacts/${digest}.zip
-```
+```bash
 
 ## Why Internal Data Planes Matter
 
