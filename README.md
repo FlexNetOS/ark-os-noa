@@ -2,6 +2,12 @@
 
 Early scaffolding for the agent-driven ark-os-noa platform.
 
+## Documentation
+
+- [Data Architecture & Autonomous Intelligence](data_architecture_autonomous_intelligence.md)
+- [Expanded Explanation & Intelligence Playbook](arkos-expanded-explained.md)
+- Additional component overviews live under `arkos-docs-output/`.
+
 ## Infrastructure
 
 The `docker-compose.yml` file provisions core internal services:
