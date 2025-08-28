@@ -1,10 +1,19 @@
 from fastapi import FastAPI
 
+from job import Job
+
 app = FastAPI(title="embeddings Service".title())
+
 
 @app.get("/")
 async def root():
     return {"service": "embeddings"}
+
+
+def process(job: Job) -> Job:
+    """Record the execution of this service on the job."""
+    job.record_step("embeddings")
+    return job
 
 if __name__ == "__main__":
     import uvicorn

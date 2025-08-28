@@ -1,10 +1,19 @@
 from fastapi import FastAPI
 
+from job import Job
+
 app = FastAPI(title="runner Service".title())
+
 
 @app.get("/")
 async def root():
     return {"service": "runner"}
+
+
+def process(job: Job) -> Job:
+    """Record the execution of this service on the job."""
+    job.record_step("runner")
+    return job
 
 if __name__ == "__main__":
     import uvicorn
