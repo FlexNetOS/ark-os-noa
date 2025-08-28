@@ -1,6 +1,5 @@
-﻿Ark AI NOA - Data Architecture & Autonomous 
-Intelligence
-Data Architecture
+# Ark AI NOA – Data Architecture & Autonomous Intelligence
+
 Internal-First Philosophy: Ark AI NOA is built on an internal-first data philosophy. All 
 critical data and artifacts remain inside the trust boundary of the system's private 
 infrastructure[1]. This means the platform avoids external dependencies for storage and 
@@ -11,20 +10,20 @@ control over integrity and confidentiality. This approach reduces exposure to ex
 breaches and keeps sensitive intelligence in-house.
 Storage Components & Structure: The data plane is composed of multiple integrated 
 storage systems, each serving a specific role[2]:
-*	Private OCI Registry: Acts as an internal container image registry for environment 
+- Private OCI Registry: Acts as an internal container image registry for environment 
 capsules, model images, and build artifacts. It stores versioned container layers 
 and ensures that all runtime environments (Capsules) and build outputs are 
 available internally for fast retrieval[2]. By using content-addressable image tags 
 (e.g. by SHA256), every image or capsule can be uniquely identified and verified for 
 integrity.
-*	MinIO (S3-Compatible Object Store): Houses large binary artifacts and 
+- MinIO (S3-Compatible Object Store): Houses large binary artifacts and 
 datasets[2]. This includes things like model weight files, training datasets, code 
 package ZIPs, PDFs of reports, and Software Bill of Materials (SBOM) documents. 
 MinIO's S3 interface makes it easy for the agents to store and retrieve bulk data 
 using standard APIs. Versioned artifacts (e.g. zipped outputs from each run, or 
 dataset snapshots) can be stored with immutable naming (content hashes or 
 timestamp prefixes) to ensure reproducibility.
-*	PostgreSQL + pgvector: Serves as the system's metadata and knowledge 
+- PostgreSQL + pgvector: Serves as the system's metadata and knowledge 
 database[3]. Postgres holds structured data - run metadata, execution traces, 
 agent logs, and indices - while the pgvector extension enables storing high-
 dimensional embeddings for semantic search[3]. This combination lets the 
@@ -34,7 +33,7 @@ summaries) for later retrieval. For example, when the Digest Agent ingests a new
 code repository, it generates embeddings of the code and stores them in pgvector; 
 later, other agents can query these vectors to recall relevant functions or 
 documents by semantic similarity.
-*	Supabase (Postgres gateway): Initially used for developer-facing ergonomics and 
+- Supabase (Postgres gateway): Initially used for developer-facing ergonomics and 
 auth, wrapping the Postgres database with a convenient API layer[4]. Supabase 
 provides authenticated access endpoints and row-level security until those 
 functions are fully internalized into Ark's own services. In essence, it's a stop-gap 
@@ -288,14 +287,14 @@ architecture of agents and agent stacks is geared towards intelligence formation
 each operation feeds into a growing knowledge base and improves future performance. 
 There is a deliberate lifecycle of learning that each piece of information goes through: 
 Observation → Abstraction → Hypothesis → Integration.
-*	Observation: The system's agents constantly observe new inputs and the 
+- Observation: The system's agents constantly observe new inputs and the 
 environment. This includes ingesting external data (via the Digest Agent's 
 web/repo/API crawling), monitoring internal events (like logs, metrics), and taking 
 note of user instructions or goals given to NOA. For example, when connected to 
 company repositories or APIs, the Digest Agent will discover and fetch data 
 sources continuously[6]. Each MicroAgentStack also observes the results of its own 
 actions in real-time (e.g., test outcomes, error messages).
-*	Abstraction: Raw observations are then abstracted into more useful 
+- Abstraction: Raw observations are then abstracted into more useful 
 representations. In practice, this means parsing and structuring information. The 
 Digest Agent, after fetching data, performs a Parse step where language-aware 
 parsers extract metadata and build an SBOM[6] (capturing the essential 
@@ -305,7 +304,7 @@ knowledge graph of key entities and their relationships[16]. This is abstraction
 turning concrete data into vectors, graphs, and summary narratives. Likewise, if a 
 MicroAgentStack is running a data analysis, it might abstract raw numbers into 
 summary statistics or identified anomalies.
-*	Hypothesis: With abstractions in hand, agents form hypotheses - potential insights 
+- Hypothesis: With abstractions in hand, agents form hypotheses - potential insights 
 or plans that explain the observations or achieve goals. For example, from a parsed 
 SBOM and vulnerability database, the Security Agent might hypothesize "these 
 components may be outdated and risky". The Strategy Agent, given a business goal 
@@ -316,7 +315,7 @@ MicroAgentStack's CommandChiefAgent might formulate a hypothesis like,
 "Feature X can be implemented by integrating API Y, given the patterns from similar 
 projects". These hypotheses aren't wild guesses - they are grounded in the 
 abstracted knowledge the system has accumulated.
-*	Integration: The final step is integrating validated hypotheses back into the 
+- Integration: The final step is integrating validated hypotheses back into the 
 system's knowledge base. If a hypothesis proves useful or correct (e.g., a suggested 
 solution worked, or a predicted risk was confirmed and mitigated), the system 
 incorporates that lesson. This can happen in several ways. The Digest Agent's 
@@ -334,7 +333,7 @@ concepts learned are added as new nodes and vectors, enriching what the agents
 can draw upon.
 Throughout this cycle, the agents and agent stacks play specific roles in growing 
 intelligence:
-*	The Digest Agent (which is part of the Board's R&D arm) is a primary source of 
+- The Digest Agent (which is part of the Board's R&D arm) is a primary source of 
 observation and abstraction for external knowledge. It continuously brings in fresh 
 data (code from repos, documentation, CRM records, etc.), parses it into structured 
 forms (SBOMs, metadata) and unstructured forms (embeddings, summaries), and 
@@ -343,7 +342,7 @@ system, ensuring that NOA and other agents have a rich library of current
 information to draw from. By doing scheduled or triggered digests, it enables 
 knowledge accumulation over time - the more it runs, the more comprehensive 
 the internal knowledge base (both vector store and relational facts) becomes.
-*	The Board Agents contribute to hypothesis formation and vetting. Each Board 
+- The Board Agents contribute to hypothesis formation and vetting. Each Board 
 Agent is an expert in a domain (strategy, compliance, security, etc.) and can analyze 
 a situation using its specialized perspective. When NOA (the top-level Executive 
 Orchestrator) is faced with a complex goal, it will consult the Board for diverse 
@@ -359,7 +358,7 @@ knowledge into decisions. The Board Agents also set policies that encode learned
 best practices - e.g., the Legal Agent might integrate a new regulatory requirement it 
 learned (from ingesting legal updates) into the compliance policy that all future 
 tasks must check.
-*	The MicroAgentStacks are where hypotheses are executed and tested in real time. 
+- The MicroAgentStacks are where hypotheses are executed and tested in real time. 
 Each MicroAgentStack is like a small experimentation lab: it's spun up to attempt 
 a specific task or approach. The CommandChiefAgent in the stack takes a plan (a 
 hypothesis of how to achieve the goal) and coordinates Operators to carry it out[10]. 
@@ -376,16 +375,16 @@ exploration), see which yields the best result, and integrate that knowledge for
 time. Over time, the platform might even train meta-models on these logs (for 
 instance, training a smaller model to predict which actions lead to success vs. 
 failure, thus giving NOA a "gut feeling" based on past data).
-*	Memory Systems: Ark AI NOA blends several forms of memory to support 
+- Memory Systems: Ark AI NOA blends several forms of memory to support 
 intelligence growth:
-*	Episodic Memory (Logs/Traces): Every agent action and result is logged with a 
+- Episodic Memory (Logs/Traces): Every agent action and result is logged with a 
 trace ID. These serve as an episodic memory of what happened, accessible for 
 audit and also for learning. Agents can query past traces; for example, NOA might 
 retrieve the trace of a similar project done last month to avoid repeating mistakes. 
 The logs are structured (with event types, timestamps, outcome codes) making it 
 possible to do analytics on them (like "how many times have we succeeded 
 building X with approach Y?").
-*	Semantic Memory (Vector Store): By encoding text and code into embeddings and 
+- Semantic Memory (Vector Store): By encoding text and code into embeddings and 
 storing in pgvector, the system gains a semantic recall ability. Agents can ask 
 questions like "have we seen something like this error before?" or "find all 
 documents related to topic Z" and get results based on meaning, not just keywords. 
@@ -394,7 +393,7 @@ vector store for anything related to "payment integration" - perhaps the digest 
 a CRM, or code from a previous integration project - and instantly retrieve the 
 relevant pieces to inform its plan. This greatly shortens learning curves, as the 
 system doesn't forget what it encountered in the past.
-*	Declarative Memory (Knowledge Graph/Database): Some facts are stored more 
+- Declarative Memory (Knowledge Graph/Database): Some facts are stored more 
 symbolically - e.g., a knowledge graph node for each service with edges for 
 dependencies and data flows, or a database table of known bugs and their fixes. 
 Agents (especially the Security and Compliance ones) use this kind of memory to 
@@ -403,7 +402,7 @@ enforce rules and checks. For example, the Security Agent might query a table of
 Digest Agent's parsing of license files). This represents institutional knowledge and 
 policies that grow over time (when a new license is deemed problematic, it gets 
 added to that table).
-*	Procedural Memory (Fine-tuned Models and Skills): Not all knowledge is explicit. 
+- Procedural Memory (Fine-tuned Models and Skills): Not all knowledge is explicit. 
 By fine-tuning models or training smaller helper models, Ark AI NOA encodes 
 repeated behaviors into the model weights themselves. Each Executive seat's 
 model can be fine-tuned on domain-specific Q&A or historical decisions[18]. Over 
@@ -664,7 +663,7 @@ and used by others, but without direct coupling.
 Real-Time Adaptive Decisioning Example: To illustrate how all these pieces work 
 together, consider a concrete scenario: Ark AI NOA is given a goal to "Develop and deploy a 
 new feature that uses machine learning to recommend products to users."
-*	Planning Phase: NOA receives this goal and breaks it into sub-tasks: (1) research 
+- Planning Phase: NOA receives this goal and breaks it into sub-tasks: (1) research 
 recommendation algorithms, (2) gather relevant user data, (3) train a model, (4) 
 integrate into the product, (5) deploy and monitor. It engages the Board: The 
 Strategy Agent comes up with technical approaches (collaborative filtering vs. 
@@ -678,7 +677,7 @@ vs. expensive API calls). They collectively perform a premortem and identify a r
 a mitigation step to do A/B testing with a smaller user group first (and a tripwire: if 
 user engagement drops by >5%, rollback the feature). All these considerations are 
 woven into a master plan, and each has an owner agent.
-*	Execution Phase: NOA now orchestrates multiple MicroAgentStacks in parallel: 
+- Execution Phase: NOA now orchestrates multiple MicroAgentStacks in parallel: 
 one stack is launched to handle data gathering (under the Growth Agent's 
 supervision), another to prototype algorithms (under the Strategy Agent's 
 supervision, perhaps using a specialized ModelStack for training with 
@@ -700,7 +699,7 @@ microservice container) and is waiting for the model. When ready, it pulls
 recommender:v1 from the OCI registry, bundles it into the service, and deploys it to 
 a staging environment (since the CTO agent's policy is no direct prod deployment 
 without testing).
-*	Adaptive Loop: Now comes adaptive decisioning: Suppose during testing, the A/B 
+- Adaptive Loop: Now comes adaptive decisioning: Suppose during testing, the A/B 
 test results indicate that the recommendations are somewhat off-mark for a certain 
 segment of users. The tripwire set by the Strategy or Growth agent triggers: the 
 engagement for new users dropped beyond the threshold. The telemetry (metrics 
@@ -726,7 +725,7 @@ SBOM scan on the new model/service (via Digest Agent's tools) before launch - al
 done by another MicroAgentStack as needed - and posts the SBOM to the internal 
 ledger for compliance (stored in MinIO and referenced in Postgres)[42]. Then the 
 feature goes live.
-*	Aftermath: NOA packages the deliverables (documentation of the feature, the final 
+- Aftermath: NOA packages the deliverables (documentation of the feature, the final 
 model, deployment manifests) and ensures everything is archived properly (the 
 Storage policies archive logs of all stacks, link the lineage: e.g., recommender:v2 is 
 linked to v1, the dataset, the code commit hash, etc. all logged in Postgres)[43]. A 

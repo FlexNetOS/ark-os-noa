@@ -1,4 +1,5 @@
+# Core dependencies for ark-os-noa services
 fastapi==0.103.2
-uvicorn==0.23.2
 httpx==0.24.1
 pytest==7.4.2
+uvicorn==0.23.2

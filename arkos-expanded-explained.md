@@ -1,4 +1,3 @@
-
 # ark‑os‑noa: Expanded Explanation & Intelligence Playbook
 
 This document provides an exhaustive description of the ark‑os‑noa platform and expands on how intelligence forms and grows within the system.  It also explains how virtual hard disk (VHDX) images could be used within this architecture and offers an extended framework for **Branchwise Foresight & Mind Mapping**.  The content consolidates information from the system’s design documents and our discussions to ensure no details are omitted.
@@ -6,7 +5,7 @@ This document provides an exhaustive description of the ark‑os‑noa platform 
 ## 1. Recap of Core Components
 
 ### NOA – ExecutiveCommanderChiefAgent
-NOA stands at the top of the hierarchy.  It transforms high‑level business goals into actionable work plans, assigns Board Agents and **MicroAgentStacks**, enforces policies and model selection, and ensures packaging and archiving.  NOA prohibits privileged Docker‑in‑Docker usage, instead relying on sidecars and outer BuildKit/containerd to run builds securelyhttps://stackoverflow.com/questions/76224543/multiple-microservices-in-one-docker-container#:~:text=Show%20activity%20on%20this%20post.
+NOA stands at the top of the hierarchy.  It transforms high‑level business goals into actionable work plans, assigns Board Agents and **MicroAgentStacks**, enforces policies and model selection, and ensures packaging and archiving.  NOA prohibits privileged Docker‑in‑Docker usage, instead relying on sidecars and outer BuildKit/containerd to run builds securely https://stackoverflow.com/questions/76224543/multiple-microservices-in-one-docker-container#:~:text=Show%20activity%20on%20this%20post.
 
 ### Board Agents
 The Board Agents act like an executive team.  Each owns a domain (Strategy/CTO, COO, CFO, Legal, Security, Growth/Partnerships and Digest).  They commission MicroAgentStacks, enforce policies, request ModelSelector assistance and govern spending, risk, compliance and partnerships.  The Digest Agent sits here and acts as R&D.
@@ -15,7 +14,7 @@ The Board Agents act like an executive team.  Each owns a domain (Strategy/CTO, 
 ModelSelectorAgents choose the optimal AI model or tool per task.  They consider task type, input size, privacy tier, latency budget and cost.  Decisions and rationales are logged for audit.  The selector draws on a catalogue of local and remote models, cost/latency forecasts and model performance telemetry.
 
 ### MicroAgentStacks
-A MicroAgentStack is an on‑demand work pod containing a **CommandChiefAgent**, Operators, Adapters and Guards.  It runs through a five‑stage lifecycle (Bootstrap, Execute, Validate, Package, Archive).  Each stack uses the Capsule pattern to avoid nested Docker and relies on sidecars to talk to the outer runtimehttps://stackoverflow.com/questions/76224543/multiple-microservices-in-one-docker-container#:~:text=Show%20activity%20on%20this%20post.
+A MicroAgentStack is an on‑demand work pod containing a **CommandChiefAgent**, Operators, Adapters and Guards.  It runs through a five‑stage lifecycle (Bootstrap, Execute, Validate, Package, Archive).  Each stack uses the Capsule pattern to avoid nested Docker and relies on sidecars to talk to the outer runtime https://stackoverflow.com/questions/76224543/multiple-microservices-in-one-docker-container#:~:text=Show%20activity%20on%20this%20post.
 
 ### Digest Agent
 The Digest Agent digests code, data, APIs, SaaS and AI models.  It performs discovery, fetching, parsing, analysis, summarisation, surfacing and security scanning.  Outputs include digest reports, knowledge graphs, embeddings and SBOM/security reports.
@@ -27,7 +26,7 @@ The digest pipeline is decomposed into microservices—Intake, Classifier, Graph
 The platform uses a private OCI registry, MinIO object storage, Postgres (plus Supabase for developer convenience) and a vector store (pgvector or Qdrant).  Policies enforce immutability, lineage, retention, least‑privilege access and provenance tracking.  Secrets are stored in Vault and never passed via environment variables.
 
 ### Combined Framework & Architecture
-The system layers strategy (NOA, Board Agents), execution (MicroAgentStacks, services), infrastructure (Capsule, event bus, data plane) and intelligence (ModelSelectorAgents, Digest Agent).  This modular architecture allows horizontal scaling, robust security and continuous adaptationhttps://stackoverflow.com/questions/76224543/multiple-microservices-in-one-docker-container#:~:text=Show%20activity%20on%20this%20post.
+The system layers strategy (NOA, Board Agents), execution (MicroAgentStacks, services), infrastructure (Capsule, event bus, data plane) and intelligence (ModelSelectorAgents, Digest Agent).  This modular architecture allows horizontal scaling, robust security and continuous adaptation https://stackoverflow.com/questions/76224543/multiple-microservices-in-one-docker-container#:~:text=Show%20activity%20on%20this%20post.
 
 ### APIs, Connectors & Front‑End
 The Gateway API (FastAPI) exposes endpoints for digesting sources, spawning capsules, toggling CRM behaviours, ingesting models and administering the system.  Connectors (GitHub, CRM, model hub, etc.) encapsulate external integrations, while the Next.js Admin Console offers dashboards for jobs, capsules, artefacts, SBOMs, models and CRM controls.
@@ -72,7 +71,7 @@ ark‑os‑noa develops intelligence by moving information through a series of *
 ### Stage 6: Foresight & Strategic Planning
 
 * **Mind Mapping:** Using the knowledge graph and embeddings, the system constructs mind maps—visual representations of relationships between components, domains and tasks.  These maps help identify impact areas, missing connections and potential integration opportunities.
-* **Branchwise Foresight:** The Board and NOA employ scenario planning and decision‑tree analysis to evaluate multiple future paths before committing resources.  This process is described in detail below and uses the knowledge base built in earlier stages.https://www.databricks.com/blog/generalists-specialists-evolution-ai-systems-toward-compound-ai#:~:text=We%E2%80%99re%20seeing%20the%20same%20evolution,aren%E2%80%99t%20perfect%20for%20every%20job
+* **Branchwise Foresight:** The Board and NOA employ scenario planning and decision‑tree analysis to evaluate multiple future paths before committing resources.  This process is described in detail below and uses the knowledge base built in earlier stages. https://www.databricks.com/blog/generalists-specialists-evolution-ai-systems-toward-compound-ai#:~:text=We%E2%80%99re%20seeing%20the%20same%20evolution,aren%E2%80%99t%20perfect%20for%20every%20job
 * **Learning Simulation:** For major decisions, MicroAgentStacks can simulate different courses of action (e.g. migrating a CRM function internally versus keeping it external) using test workloads, synthetic data or replayed traffic.  The results feed into the Branchwise Foresight evaluation.
 * **Storage Integration:** Mind maps, decision trees and simulation outputs are stored in MinIO and Postgres.  They are versioned and linked to the decisions they informed.
 
