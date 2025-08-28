@@ -2,7 +2,7 @@ from fastapi import FastAPI
 
 from job import Job
 
-app = FastAPI(title="safety Service".title())
+app = FastAPI(title="safety Service")
 
 
 @app.get("/")
