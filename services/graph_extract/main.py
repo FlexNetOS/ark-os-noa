@@ -2,7 +2,7 @@ from fastapi import FastAPI
 
 from job import Job
 
-app = FastAPI(title="graph extract Service".title())
+app = FastAPI(title="Graph Extract Service")
 
 
 @app.get("/")
