@@ -2,7 +2,7 @@ from fastapi import FastAPI
 
 from job import Job
 
-app = FastAPI(title="env synthesis Service".title())
+app = FastAPI(title="env synthesis Service")
 
 
 @app.get("/")
