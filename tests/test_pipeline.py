@@ -9,6 +9,7 @@ from pipeline import run_pipeline
 
 EXPECTED_STEPS = [
     "intake",
+    "model_selector",
     "classifier",
     "graph_extract",
     "embeddings",
