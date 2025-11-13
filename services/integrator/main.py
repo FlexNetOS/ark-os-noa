@@ -1,12 +1,25 @@
+import sys
+from pathlib import Path
+
 from fastapi import FastAPI
 
-app = FastAPI(title="integrator Service".title())
+ROOT = Path(__file__).resolve().parents[2]
+if str(ROOT) not in sys.path:
+    sys.path.append(str(ROOT))
+
+from job import Job
+
+app = FastAPI(title="Integrator Service")
+
 
 @app.get("/")
 async def root():
     return {"service": "integrator"}
 
 
+def process(job: Job) -> Job:
+    """Record the execution of this service on the job."""
+    job.record_step("integrator")
 def process(job: dict) -> dict:
     """Append this service's name to the job step trace."""
     job.setdefault("steps", []).append("integrator")
