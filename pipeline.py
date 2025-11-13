@@ -2,6 +2,8 @@
 from typing import Any
 
 from job import Job
+from typing import Any, Dict
+
 from services.intake import main as intake
 from services.classifier import main as classifier
 from services.graph_extract import main as graph_extract
@@ -27,6 +29,9 @@ SERVICE_SEQUENCE = [
 def run_pipeline(data: Any) -> Job:
     """Run the stub pipeline by passing a job through each service."""
     job = Job.create(data)
+def run_pipeline(data: Any) -> Dict[str, Any]:
+    """Run the stub pipeline by passing a job through each service."""
+    job: Dict[str, Any] = {"data": data, "steps": []}
     for module in SERVICE_SEQUENCE:
         job = module.process(job)
     return job

@@ -30,3 +30,4 @@ def test_run_pipeline():
             assert marker.read_text() == step
     finally:
         shutil.rmtree(result.workspace)
+    assert result["steps"] == EXPECTED_STEPS

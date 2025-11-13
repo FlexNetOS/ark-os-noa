@@ -20,6 +20,9 @@ async def root():
 def process(job: Job) -> Job:
     """Record the execution of this service on the job."""
     job.record_step("env_synthesis")
+def process(job: dict) -> dict:
+    """Append this service's name to the job step trace."""
+    job.setdefault("steps", []).append("env_synthesis")
     return job
 
 if __name__ == "__main__":
