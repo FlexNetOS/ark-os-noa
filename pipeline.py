@@ -1,4 +1,7 @@
 """Simple sequential pipeline orchestrator for service stubs."""
+from typing import Any
+
+from job import Job
 from typing import Any, Dict
 
 from services.intake import main as intake
@@ -25,6 +28,9 @@ SERVICE_SEQUENCE = [
     registrar,
 ]
 
+def run_pipeline(data: Any) -> Job:
+    """Run the stub pipeline by passing a job through each service."""
+    job = Job.create(data)
 def run_pipeline(data: Any) -> Dict[str, Any]:
     """Run the stub pipeline by passing a job through each service."""
     job: Dict[str, Any] = {"data": data, "steps": []}
