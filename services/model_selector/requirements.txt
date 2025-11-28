@@ -1,0 +1,7 @@
+# Service-specific dependencies
+# Inherits from main requirements.txt
+
+# Add service-specific packages here
+# Example:
+# pandas==2.0.3
+# numpy==1.24.3

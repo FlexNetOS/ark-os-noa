@@ -5,6 +5,7 @@ from job import Job
 from typing import Any, Dict
 
 from services.intake import main as intake
+from services.model_selector import main as model_selector
 from services.classifier import main as classifier
 from services.graph_extract import main as graph_extract
 from services.embeddings import main as embeddings
@@ -16,6 +17,7 @@ from services.registrar import main as registrar
 
 SERVICE_SEQUENCE = [
     intake,
+    model_selector,
     classifier,
     graph_extract,
     embeddings,
